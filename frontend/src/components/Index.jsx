@@ -114,7 +114,7 @@ export const Index = () => {
 
                             {pois != null &&
                                 pois.map((poi) => (
-                                    <Marker position={[poi.latitude, poi.longitude]} icon={icon1}>
+                                    <Marker position={[poi.latitude, poi.longitude]} icon={icon1} key={poi.id}>
                                         <Popup>
                                             {poi.name}
                                         </Popup>
