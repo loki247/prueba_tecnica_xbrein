@@ -116,6 +116,7 @@ export const Index = () => {
                                 pois.map((poi) => (
                                     <Marker position={[poi.latitude, poi.longitude]} icon={icon1} key={poi.id} eventHandlers={{
                                         click: () => {
+                                            //Si se hace click en un marcador se marcará este en la lista para identificarlo
                                             let marker = document.getElementById("poi_" + poi.id);
 
                                             if (marker.classList.contains('checked')) {
@@ -125,7 +126,7 @@ export const Index = () => {
                                             }else{
                                                 marker.classList.add('checked');
                                                 marker.style.fontWeight = "bold";
-                                                marker.style.backgroundColor = "#c0c0c0";
+                                                marker.style.backgroundColor = "#e6e6e6";
                                             }
                                         }
                                     }}>
