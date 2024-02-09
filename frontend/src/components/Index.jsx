@@ -1,24 +1,29 @@
-import {getPois} from "../api/pois";
+import {getPois, getCategorias} from "../api/pois";
 import React, {useState, useEffect} from "react";
 import Head from "./partials/Head";
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
-import axios from "axios";
-
-const baseURL = "http://localhost:4000";
+import {Icon} from 'leaflet';
 
 export const Index = () => {
-    const [categoria, setCategoria] = React.useState(null);
-    const [categorias, setCategorias] = React.useState(null);
-    const [pois, setPois] = React.useState(null);
-    const [poisFiltrados, setPoisFiltrados] = React.useState(null);
+    const icon1 = new Icon ({
+        iconUrl : require("../images/marker-icon.png"),
+        iconSize : [20,30],
+        iconAnchor : [22,94],
+        popupAnchor : [-3, -76]
+    });
 
-    const getCategorias = async () => {
-        axios.get(baseURL + "/get-categorias").then((response) => {
-            setCategorias(response.data);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
+    const icon2 = new Icon ({
+        iconUrl : require("../images/marker-icon_2.png"),
+        iconSize : [20,30],
+        iconAnchor : [22,94],
+        popupAnchor : [-3, -76]
+
+    });
+
+    const [categoria, setCategoria] = useState(null);
+    const [categorias, setCategorias] = useState(null);
+    const [pois, setPois] = useState(null);
+    const [poisFiltrados, setPoisFiltrados] = useState(null);
 
     const categoriasOnChange = (event) => {
         if (!event.target.value) {
@@ -33,7 +38,9 @@ export const Index = () => {
     }
 
     useEffect(() => {
-        getCategorias();
+        getCategorias().then(jsonCategorias => {
+            setCategorias(jsonCategorias)
+        });
     }, []);
 
     useEffect(() => {
@@ -75,7 +82,8 @@ export const Index = () => {
                             <hr/>
 
                             <b>Puntos de Interés</b>
-
+                            <br/>
+                            <small>Resultados: { poisFiltrados != null ? poisFiltrados.length : 0 }</small>
                             <hr/>
 
                             <ul className="list-unstyled" style={{height: '600px', overflow: 'scroll'}}>
@@ -101,11 +109,21 @@ export const Index = () => {
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
 
-                            <Marker position={[-33.4266707, -70.6202899]}>
+                            <Marker position={[-33.426599, -70.6209158]} icon={icon2}>
                                 <Popup>
-                                    A pretty CSS3 popup. <br /> Easily customizable.
+                                    Almirante Pastene 244
                                 </Popup>
                             </Marker>
+
+                            {poisFiltrados != null &&
+                                poisFiltrados.map((poi) => (
+                                    <Marker position={[poi.latitude, poi.longitude]} icon={icon1}>
+                                        <Popup>
+                                            {poi.name}
+                                        </Popup>
+                                    </Marker>
+                                ))
+                            }
                         </MapContainer>
                     </div>
                 </div>

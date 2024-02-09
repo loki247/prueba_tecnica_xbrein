@@ -1,5 +1,6 @@
 const poisModel = require("../models/Pois");
 
+//Obtendo los PIOS. Si el valor de categoría no se envía muestra todo.
 const getPois = async (req, res) => {
     const data = req.body;
 
@@ -9,6 +10,7 @@ const getPois = async (req, res) => {
     res.send(pois);
 }
 
+//Obtengo las categorías
 const getCategorias = async (req, res) => {
     const categorias = [
         {id: 10084, nombre: "ALMACENES"},

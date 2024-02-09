@@ -1,6 +1,7 @@
 const {select} = require("../utils/conectorBD");
 const table = "public.pois";
 
+//Obtiene los POIS desde la base de datos
 const getPois = async (categoria) => {
     const query = {
         table: table,
