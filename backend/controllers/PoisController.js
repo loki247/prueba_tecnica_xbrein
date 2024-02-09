@@ -6,7 +6,6 @@ const getPois = async (req, res) => {
 
     const pois  = await poisModel.getPois(data.categoria)
 
-    res.append('Content-Type', 'application/json');
     res.send(pois);
 }
 
@@ -21,7 +20,6 @@ const getCategorias = async (req, res) => {
         {id: 10008, nombre: "SUPERMERCADOS"},
     ];
 
-    res.append('Content-Type', 'application/json');
     res.send(categorias);
 }
 

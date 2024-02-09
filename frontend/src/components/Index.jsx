@@ -23,18 +23,16 @@ export const Index = () => {
     const [categoria, setCategoria] = useState(null);
     const [categorias, setCategorias] = useState(null);
     const [pois, setPois] = useState(null);
-    const [poisFiltrados, setPoisFiltrados] = useState(null);
 
     const categoriasOnChange = (event) => {
-        if (!event.target.value) {
-            return setPoisFiltrados(pois)
-        }
-
         setCategoria(event.target.value)
 
-        const resultsArray = pois.filter((poi) => poi.category_id == event.target.value)
-
-        setPoisFiltrados(resultsArray)
+        //Actualiza el listado de POIS al cambiar de categoría
+        getPois(event.target.value).then(response => {
+            setPois(response);
+        }).catch((response) => {
+            console.log(response);
+        });
     }
 
     useEffect(() => {
@@ -44,12 +42,12 @@ export const Index = () => {
     }, []);
 
     useEffect(() => {
-        getPois().then(jsonPois => {
-            setPois(jsonPois);
+        getPois(categoria).then(response => {
+            setPois(response);
 
-            return jsonPois;
-        }).then(jsonPois => {
-            setPoisFiltrados(jsonPois);
+            return response;
+        }).catch((response) => {
+            console.log(response);
         });
     }, []);
 
@@ -73,7 +71,6 @@ export const Index = () => {
 
                                 <label htmlFor="categorias">Categorías</label>
                             </div>
-
                         </div>
                     </div>
 
@@ -83,12 +80,12 @@ export const Index = () => {
 
                             <b>Puntos de Interés</b>
                             <br/>
-                            <small>Resultados: { poisFiltrados != null ? poisFiltrados.length : 0 }</small>
+                            <small>Resultados: { pois != null ? pois.length : 0 }</small>
                             <hr/>
 
                             <ul className="list-unstyled" style={{height: '600px', overflow: 'scroll'}}>
-                                {poisFiltrados != null &&
-                                    poisFiltrados.map((poi) => (
+                                {pois != null &&
+                                    pois.map((poi) => (
                                         <li style={{ borderTop: '1px solid'}}>
                                             {poi.name}
                                             <br/>
@@ -115,8 +112,8 @@ export const Index = () => {
                                 </Popup>
                             </Marker>
 
-                            {poisFiltrados != null &&
-                                poisFiltrados.map((poi) => (
+                            {pois != null &&
+                                pois.map((poi) => (
                                     <Marker position={[poi.latitude, poi.longitude]} icon={icon1}>
                                         <Popup>
                                             {poi.name}
