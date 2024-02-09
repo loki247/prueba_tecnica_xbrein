@@ -2,14 +2,11 @@ import axios from "axios";
 
 const baseURL = "http://localhost:4000";
 
-export const getPois = () => {
-    axios.get(baseURL + "/get-categorias").then((response) => {
-        return response.data;
-    }).catch((error) => {
-        console.log(error);
-    });
-}
+export const api = axios.create({
+    baseURL: baseURL
+})
 
-export default  {
-    getPois
-};
+export const getPois = async () => {
+    const response = await api.get('/get-pois')
+    return response.data
+}
