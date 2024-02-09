@@ -1,0 +1,31 @@
+{
+  "rut_remitente": "18435938-3",
+  "nombres_remitente": "Felipe",
+  "apellido1_remitente": "Rodríguez",
+  "apellido2_remitente": "Muñoz",
+  "telefono_remitente": "962006770",
+  "email_remitente": "rodriguezmunoz92@gmail.com",
+  "rut_destinatario": "18711661-9",
+  "nombres_destinatario": "Valentina",
+  "apellido1_destinatario": "Piñaleo",
+  "apellido2_destinatario": "Castillo",
+  "telefono_destinatario": "973210254",
+  "email_destinatario": "valentinapinaleo.tm@gmail.com",
+  "id_sucursal_origen": 1,
+  "id_sucursal_destino": 2,
+  "id_tipo_encomienda": 2,
+  "domicilio": true,
+  "direccion": "7 Poniente 140",
+  "fragil": false,
+  "descripcion": "Libros",
+  "avaluo": 25000,
+  "usuario_venta": 1,
+  "paquetes": [
+    {
+      "peso": 2,
+      "alto": 15,
+      "ancho": 15,
+      "largo": 20
+    }
+  ]
+}
