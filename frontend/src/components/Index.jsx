@@ -86,7 +86,7 @@ export const Index = () => {
                             <ul className="list-unstyled" style={{height: '600px', overflow: 'scroll'}}>
                                 {pois != null &&
                                     pois.map((poi) => (
-                                        <li style={{ borderTop: '1px solid'}}>
+                                        <li style={{ borderTop: '1px solid'}} id={"poi_" + poi.id}>
                                             {poi.name}
                                             <br/>
                                             <small className="ps-2">{poi.category_name}</small>
@@ -114,7 +114,21 @@ export const Index = () => {
 
                             {pois != null &&
                                 pois.map((poi) => (
-                                    <Marker position={[poi.latitude, poi.longitude]} icon={icon1} key={poi.id}>
+                                    <Marker position={[poi.latitude, poi.longitude]} icon={icon1} key={poi.id} eventHandlers={{
+                                        click: () => {
+                                            let marker = document.getElementById("poi_" + poi.id);
+
+                                            if (marker.classList.contains('checked')) {
+                                                marker.classList.remove('checked');
+                                                marker.style.fontWeight = "";
+                                                marker.style.backgroundColor = "";
+                                            }else{
+                                                marker.classList.add('checked');
+                                                marker.style.fontWeight = "bold";
+                                                marker.style.backgroundColor = "#c0c0c0";
+                                            }
+                                        }
+                                    }}>
                                         <Popup>
                                             {poi.name}
                                         </Popup>
