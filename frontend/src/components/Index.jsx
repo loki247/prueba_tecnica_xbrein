@@ -17,7 +17,6 @@ export const Index = () => {
         iconSize : [20,30],
         iconAnchor : [22,94],
         popupAnchor : [-3, -76]
-
     });
 
     const [categoria, setCategoria] = useState(null);
@@ -83,7 +82,7 @@ export const Index = () => {
                             <small>Resultados: { pois != null ? pois.length : 0 }</small>
                             <hr/>
 
-                            <ul className="list-unstyled" style={{height: '600px', overflow: 'scroll'}}>
+                            <ul className="list-unstyled" style={{height: '600px', overflow: 'scroll'}} id="lista_pois">
                                 {pois != null &&
                                     pois.map((poi) => (
                                         <li style={{ borderTop: '1px solid'}} id={"poi_" + poi.id}>
@@ -115,19 +114,21 @@ export const Index = () => {
                             {pois != null &&
                                 pois.map((poi) => (
                                     <Marker position={[poi.latitude, poi.longitude]} icon={icon1} key={poi.id} eventHandlers={{
-                                        click: () => {
-                                            //Si se hace click en un marcador se marcará este en la lista para identificarlo
+                                        mouseover: () => {
+                                            //Si se posa el puntero sobre un marcador se marcará este en la lista para identificarlo
                                             let marker = document.getElementById("poi_" + poi.id);
 
-                                            if (marker.classList.contains('checked')) {
-                                                marker.classList.remove('checked');
-                                                marker.style.fontWeight = "";
-                                                marker.style.backgroundColor = "";
-                                            }else{
-                                                marker.classList.add('checked');
-                                                marker.style.fontWeight = "bold";
-                                                marker.style.backgroundColor = "#e6e6e6";
-                                            }
+                                            marker.classList.add('checked');
+                                            marker.style.fontWeight = "bold";
+                                            marker.style.backgroundColor = "#e6e6e6";
+                                        },
+                                        mouseout: () => {
+                                            //Si se saca el puntero de un marcador se desmarcará este en la lista para identificarlo
+                                            let marker = document.getElementById("poi_" + poi.id);
+
+                                            marker.classList.remove('checked');
+                                            marker.style.fontWeight = "";
+                                            marker.style.backgroundColor = "";
                                         }
                                     }}>
                                         <Popup>
