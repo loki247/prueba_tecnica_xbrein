@@ -14,8 +14,6 @@ export const api = axios.create({
 //Llamada al api que obtiene los pois
 export const getPois = async (categoria) => {
     const response = await api.post('/get-pois',{categoria: categoria});
-    //Descomentar esa línea para probar con el backend con node y express.
-    //return response.data;
 
     return response.data.body;
 }
@@ -23,8 +21,6 @@ export const getPois = async (categoria) => {
 //Llamada al api que obtiene las categorias
 export const getCategorias = async () => {
     const response = await api.get("/get-categorias");
-    //Descomentar esa línea para probar con el backend con node y express.
-    //return response.data;
 
     return response.data.body;
 }

@@ -6,7 +6,17 @@ const getPois = async (req, res) => {
 
     const pois  = await poisModel.getPois(data.categoria)
 
-    res.send(pois);
+    response = {
+        'statusCode': 200,
+        'headers': {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "*"
+        },
+        'body': pois
+    }
+
+    res.send(response);
 }
 
 //Obtengo las categorías
@@ -20,7 +30,17 @@ const getCategorias = async (req, res) => {
         {id: 10008, nombre: "SUPERMERCADOS"},
     ];
 
-    res.send(categorias);
+    response = {
+        'statusCode': 200,
+        'headers': {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "*"
+        },
+        'body': categorias
+    }
+
+    res.send(response);
 }
 
 
