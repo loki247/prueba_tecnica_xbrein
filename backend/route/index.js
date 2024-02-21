@@ -1,4 +1,4 @@
-const poisController = require("../controllers/PoisController");
+const poisController = require("../controllers/bkp/PoisController");
 
 //Rutas del API
 const routes = (app) => {
