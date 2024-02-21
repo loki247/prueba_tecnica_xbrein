@@ -1,10 +1,11 @@
-const poisModel = require("../../models/Pois");
+import {Request, Response} from "express";
+import poisModel from "../models/bkp/Pois.js";
 
 //Obtendo los PIOS. Si el valor de categoría no se envía muestra todo.
-async function getPois(req, res){
+const getPois = async (req: Request, res: Response) => {
     const data = req.body;
 
-    const pois  = await poisModel.getPois(data.categoria)
+    const pois  = await poisModel.getPois(data.categoria);
 
     const response = {
         'statusCode': 200,
@@ -20,7 +21,7 @@ async function getPois(req, res){
 }
 
 //Obtengo las categorías
-async function getCategorias(req, res) {
+const getCategorias =  async (req: Request, res: Response) => {
     const categorias = [
         {id: 10084, nombre: "ALMACENES"},
         {id: 10003, nombre: "BANCOS"},
@@ -44,7 +45,7 @@ async function getCategorias(req, res) {
 }
 
 
-module.exports = {
+export{
     getPois,
     getCategorias
 }

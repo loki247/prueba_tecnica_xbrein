@@ -1,4 +1,4 @@
-const poisModel = require("../../models/Pois");
+const poisModel = require("../../models/bkp/Pois");
 
 //Obtendo los PIOS. Si el valor de categoría no se envía muestra todo.
 const getPois = async (req, res) => {
